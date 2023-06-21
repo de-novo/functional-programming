@@ -17,13 +17,21 @@ function isArrayLike(obj: any) {
     );
 }
 
-const _each = <T>(list: T[], iter: (arg: T) => any): T[] | T => {
+export const _each = <T>(
+    list: T[],
+    iter: (arg: T, i: number) => any
+): T[] | T => {
     if (Array.isArray(list) || isArrayLike(list)) {
         for (let i = 0; i < list.length; i++) {
-            iter(list[i] as T);
+            iter(list[i] as T, i);
         }
     }
     return list;
 };
 
 _each([1, { a: 1 }, 3], console.log);
+
+_each([1, 2, 3], (value, i) => {
+    console.log(i);
+    console.log(value);
+});

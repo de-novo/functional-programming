@@ -1,12 +1,22 @@
 import { _each } from "../each/each";
 
+/**
+ * 함수형 프로그래밍 연습 - filter
+ * 함수형 프로그래밍에서 filter는 배열에서 특정 조건을 만족하는 값만 추출하는 함수이다.
+ * filter는 배열을 순회하면서 특정 조건을 만족하는 값만 추출하여 새로운 배열을 만든다.
+ * filter는 순수 함수로 구현해야 한다.
+ * filter는 원본 배열을 변경하지 않고 새로운 배열을 생성한다.
+ * filter는 원본 배열의 순서를 유지한다.
+ * filter는 원본 배열의 값을 변경하지 않는다.
+ */
+
 export const _filter = <T>(
     list: T[],
-    predicate: (value: T) => boolean
+    predicate: (value: T, i: number) => boolean
 ): T[] => {
     const newList: T[] = [];
-    _each(list, (value) => {
-        if (predicate(value)) {
+    _each(list, (value, i) => {
+        if (predicate(value, i)) {
             newList.push(value);
         }
     });
