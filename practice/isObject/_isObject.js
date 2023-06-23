@@ -5,11 +5,11 @@ var _isObject = function (value) {
     return value !== null && typeof value === "object";
 };
 exports._isObject = _isObject;
-console.log((0, exports._isObject)({}));
-console.log((0, exports._isObject)([]));
-console.log((0, exports._isObject)(null));
-console.log((0, exports._isObject)(undefined));
-console.log((0, exports._isObject)(1));
-console.log((0, exports._isObject)("1"));
-console.log((0, exports._isObject)(true));
-console.log((0, exports._isObject)(false));
+// console.log(_isObject({})); // true
+// console.log(_isObject([])); // true
+// console.log(_isObject(null)); // false
+// console.log(_isObject(undefined)); // false
+// console.log(_isObject(1)); // false
+// console.log(_isObject("1"));     // false
+// console.log(_isObject(true));    // false
+// console.log(_isObject(false));   // false
