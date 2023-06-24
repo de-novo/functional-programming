@@ -1,6 +1,6 @@
 import { _isObject } from "../isObject/_isObject";
 
-export const _keys = (value: any): string[] => {
+export const _keys = <T extends object | any[]>(value: T): string[] => {
     if (!_isObject(value)) {
         return [];
     }
