@@ -47,3 +47,15 @@ const _testReverseCurrying = _curryr(
 );
 
 console.log(_testReverseCurrying("a")(true)(1));
+export const _curryr2 = <T extends (...args: any[]) => any, K>(
+    fn: T
+): ((...args: any[]) => ReturnType<T>) | ((nextArg: K) => ReturnType<T>) => {
+    return function curried(...args: any[]) {
+        if (args.length >= fn.length) {
+            return fn(...args);
+        }
+        return function (nextArg: K) {
+            return curried(...args, nextArg);
+        };
+    } as ((...args: any[]) => ReturnType<T>) | ((nextArg: K) => ReturnType<T>);
+};

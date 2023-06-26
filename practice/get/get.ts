@@ -1,29 +1,37 @@
 import { _curryr } from "../curryingReverce/curryr";
-function get<T, K extends keyof T>(object: T, key: K): T[K] | undefined {
+
+type Get<T, K extends keyof T> = (obj: T, key: K) => T[K];
+
+function get<T, K extends keyof T>(object: T, key: K): T[K] {
     return object[key];
 }
+const _get = <T, K extends keyof T = keyof T>(key: K) =>
+    _curryr<Get<T, K>>(get)(key);
+type A = { id?: string; name: string; age: number };
+type B = Get<A, "id">;
 
 const obj = { id: "1" };
-// 사용 예
-// let obj = { a: 1, b: 2, c: 3 };
+const st = _get<{ id: string }>("id")(obj);
+
 let arr = [4, 5, 6];
+const st2 = _get<number[]>(1)(arr);
 console.log(get(obj, "id")); // 2
 console.log(get(arr, 1)); // 5
 namespace a {
-    interface A {
-        id: string;
-        name: string;
-        age: number;
-        a?: string;
+    type Get<T, K extends keyof T> = (obj: T, key: K) => T[K];
+
+    function get<T, K extends keyof T>(object: T, key: K): T[K] {
+        return object[key];
     }
+    const _get = <T, K extends keyof T = keyof T>(key: K) =>
+        _curryr<Get<T, K>>(get)(key);
+    type A = { id?: string; name: string; age: number };
+    type B = Get<A, "id">;
 
-    type Get<T, K> = (obj: T, key: K) => K extends keyof T ? T[K] : undefined;
-    const getCurryr = _curryr(get<A, keyof A>);
-    const getTest1 = getCurryr("id");
-    const getTest2 = getCurryr("name");
-    const getTest3 = getCurryr("age");
-    const getTest4 = getCurryr("a");
+    const obj = { id: "1" };
+    const st = _get<{ id: string }>("id")(obj);
 
+    let arr = [4, 5, 6];
     // function get<T, K extends keyof T>(obj: T, key: K): T[K] {
     //     return obj[key];
     // }
