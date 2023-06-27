@@ -5,7 +5,7 @@ type Get<T, K extends keyof T> = (obj: T, key: K) => T[K];
 function get<T, K extends keyof T>(object: T, key: K): T[K] {
     return object[key];
 }
-const _get = <T, K extends keyof T = keyof T>(key: K) =>
+export const _get = <T, K extends keyof T = keyof T>(key: K) =>
     _curryr<Get<T, K>>(get)(key);
 type A = { id?: string; name: string; age: number };
 type B = Get<A, "id">;
