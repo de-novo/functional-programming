@@ -6,7 +6,10 @@ import { _each } from "../each/each";
  * 컬렉션의 각 원소를 변형하여 새로운 컬렉션을 만드는 함수이다.
  */
 
-const _map = <T, R>(list: T[], mapper: (value: T, i: number) => R): R[] => {
+export const _map = <T, R>(
+    list: T[],
+    mapper: (value: T, i: number) => R
+): R[] => {
     const newList: R[] = [];
     _each(list, (value, i) => {
         newList.push(mapper(value, i));
